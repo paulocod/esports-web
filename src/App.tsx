@@ -1,6 +1,7 @@
 
 import './styles/main.css'
 
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import logoImg from './assets/logo-nlw-esports.svg'
 import { CreateAdBanner } from './components/CreateAdBanner'
@@ -22,12 +23,8 @@ function App() {
   const [games, setGames] = useState<Game[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/games')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        setGames(data)
-      })
+    axios('http://localhost:3000/games')
+      .then(response => { setGames(response.data) })
   }, [])
 
   return (
